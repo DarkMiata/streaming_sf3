@@ -21,6 +21,17 @@ class Saison
      */
     private $id;
 
+     /**
+     * @ORM\joinColumn(name="serie_id")
+     * @ORM\ManyToOne(targetEntity="Serie")
+     */
+    private $serie;
+    
+     /**
+     * @ORM\OneToMany(targetEntity="episode", mappedBy="saison")
+     */
+    private $episode;
+    
     /**
      * @var int
      *
@@ -92,5 +103,70 @@ class Saison
     public function getNbepisodes()
     {
         return $this->nbepisodes;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->episode = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set serie
+     *
+     * @param \AppBundle\Entity\Serie $serie
+     *
+     * @return Saison
+     */
+    public function setSerie(\AppBundle\Entity\Serie $serie = null)
+    {
+        $this->serie = $serie;
+
+        return $this;
+    }
+
+    /**
+     * Get serie
+     *
+     * @return \AppBundle\Entity\Serie
+     */
+    public function getSerie()
+    {
+        return $this->serie;
+    }
+
+    /**
+     * Add episode
+     *
+     * @param \AppBundle\Entity\episode $episode
+     *
+     * @return Saison
+     */
+    public function addEpisode(\AppBundle\Entity\episode $episode)
+    {
+        $this->episode[] = $episode;
+
+        return $this;
+    }
+
+    /**
+     * Remove episode
+     *
+     * @param \AppBundle\Entity\episode $episode
+     */
+    public function removeEpisode(\AppBundle\Entity\episode $episode)
+    {
+        $this->episode->removeElement($episode);
+    }
+
+    /**
+     * Get episode
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEpisode()
+    {
+        return $this->episode;
     }
 }

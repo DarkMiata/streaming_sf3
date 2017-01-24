@@ -22,6 +22,12 @@ class Lien
     private $id;
 
     /**
+     * @ORM\joinColumn(name="episode_id")
+     * @ORM\ManyToOne(targetEntity="Episode")
+     */
+    private $episode;
+    
+    /**
      * @var string
      *
      * @ORM\Column(name="url", type="string", length=255)
@@ -61,5 +67,29 @@ class Lien
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * Set episode
+     *
+     * @param \AppBundle\Entity\Episode $episode
+     *
+     * @return Lien
+     */
+    public function setEpisode(\AppBundle\Entity\Episode $episode = null)
+    {
+        $this->episode = $episode;
+
+        return $this;
+    }
+
+    /**
+     * Get episode
+     *
+     * @return \AppBundle\Entity\Episode
+     */
+    public function getEpisode()
+    {
+        return $this->episode;
     }
 }

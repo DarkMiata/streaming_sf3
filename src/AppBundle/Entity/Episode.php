@@ -21,6 +21,18 @@ class Episode
      */
     private $id;
 
+     /**
+     * @ORM\joinColumn(name="saison_id")
+     * @ORM\ManyToOne(targetEntity="Saison")
+     */
+    private $saison;
+
+    
+    /**
+     * @ORM\OneToMany(targetEntity="lien", mappedBy="episode")
+     */
+    private $lien;
+    
     /**
      * @var int
      *
@@ -92,5 +104,70 @@ class Episode
     public function getDuree()
     {
         return $this->duree;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->lien = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add lien
+     *
+     * @param \AppBundle\Entity\lien $lien
+     *
+     * @return Episode
+     */
+    public function addLien(\AppBundle\Entity\lien $lien)
+    {
+        $this->lien[] = $lien;
+
+        return $this;
+    }
+
+    /**
+     * Remove lien
+     *
+     * @param \AppBundle\Entity\lien $lien
+     */
+    public function removeLien(\AppBundle\Entity\lien $lien)
+    {
+        $this->lien->removeElement($lien);
+    }
+
+    /**
+     * Get lien
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLien()
+    {
+        return $this->lien;
+    }
+
+    /**
+     * Set saison
+     *
+     * @param \AppBundle\Entity\Saison $saison
+     *
+     * @return Episode
+     */
+    public function setSaison(\AppBundle\Entity\Saison $saison = null)
+    {
+        $this->saison = $saison;
+
+        return $this;
+    }
+
+    /**
+     * Get saison
+     *
+     * @return \AppBundle\Entity\Saison
+     */
+    public function getSaison()
+    {
+        return $this->saison;
     }
 }

@@ -22,6 +22,18 @@ class Film
     private $id;
     
     /**
+     * @ORM\ManyToMany(targetEntity="Casting")
+     * @ORM\JoinTable(name="film_realises")
+     */
+    private $realisateurs;
+    
+     /**
+     * @ORM\joinColumn(name="pays_id")
+     * @ORM\ManyToOne(targetEntity="Pays")
+     */
+    private $pays;  
+    
+    /**
      * @ORM\JoinColumn(name="genre_id")
      * @ORM\ManyToOne(targetEntity="Genre")
      */
@@ -184,5 +196,70 @@ class Film
     public function getGenre()
     {
         return $this->genre;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->realisateurs = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add realisateur
+     *
+     * @param \AppBundle\Entity\Casting $realisateur
+     *
+     * @return Film
+     */
+    public function addRealisateur(\AppBundle\Entity\Casting $realisateur)
+    {
+        $this->realisateurs[] = $realisateur;
+
+        return $this;
+    }
+
+    /**
+     * Remove realisateur
+     *
+     * @param \AppBundle\Entity\Casting $realisateur
+     */
+    public function removeRealisateur(\AppBundle\Entity\Casting $realisateur)
+    {
+        $this->realisateurs->removeElement($realisateur);
+    }
+
+    /**
+     * Get realisateurs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRealisateurs()
+    {
+        return $this->realisateurs;
+    }
+
+    /**
+     * Set pays
+     *
+     * @param \AppBundle\Entity\Pays $pays
+     *
+     * @return Film
+     */
+    public function setPays(\AppBundle\Entity\Pays $pays = null)
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
+    /**
+     * Get pays
+     *
+     * @return \AppBundle\Entity\Pays
+     */
+    public function getPays()
+    {
+        return $this->pays;
     }
 }

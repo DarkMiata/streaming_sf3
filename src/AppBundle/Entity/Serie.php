@@ -21,6 +21,23 @@ class Serie
      */
     private $id;
 
+     /**
+     * @ORM\joinColumn(name="genre_id")
+     * @ORM\ManyToOne(targetEntity="Genre")
+     */
+    private $genre;  
+    
+     /**
+     * @ORM\joinColumn(name="pays_id")
+     * @ORM\ManyToOne(targetEntity="Pays")
+     */
+    private $pays;
+    
+     /**
+     * @ORM\OneToMany(targetEntity="saison", mappedBy="serie")
+     */
+    private $saison;
+    
     /**
      * @var string
      *
@@ -123,5 +140,94 @@ class Serie
     public function getNbepisodes()
     {
         return $this->nbepisodes;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->saison = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set genre
+     *
+     * @param \AppBundle\Entity\Genre $genre
+     *
+     * @return Serie
+     */
+    public function setGenre(\AppBundle\Entity\Genre $genre = null)
+    {
+        $this->genre = $genre;
+
+        return $this;
+    }
+
+    /**
+     * Get genre
+     *
+     * @return \AppBundle\Entity\Genre
+     */
+    public function getGenre()
+    {
+        return $this->genre;
+    }
+
+    /**
+     * Set pays
+     *
+     * @param \AppBundle\Entity\Pays $pays
+     *
+     * @return Serie
+     */
+    public function setPays(\AppBundle\Entity\Pays $pays = null)
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
+    /**
+     * Get pays
+     *
+     * @return \AppBundle\Entity\Pays
+     */
+    public function getPays()
+    {
+        return $this->pays;
+    }
+
+    /**
+     * Add saison
+     *
+     * @param \AppBundle\Entity\saison $saison
+     *
+     * @return Serie
+     */
+    public function addSaison(\AppBundle\Entity\saison $saison)
+    {
+        $this->saison[] = $saison;
+
+        return $this;
+    }
+
+    /**
+     * Remove saison
+     *
+     * @param \AppBundle\Entity\saison $saison
+     */
+    public function removeSaison(\AppBundle\Entity\saison $saison)
+    {
+        $this->saison->removeElement($saison);
+    }
+
+    /**
+     * Get saison
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSaison()
+    {
+        return $this->saison;
     }
 }
