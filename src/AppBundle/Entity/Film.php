@@ -20,6 +20,12 @@ class Film
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @ORM\JoinColumn(name="genre_id")
+     * @ORM\ManyToOne(targetEntity="Genre")
+     */
+    private $genre;
 
     /**
      * @var string
@@ -155,5 +161,28 @@ class Film
     {
         return $this->anneeprod;
     }
-}
 
+    /**
+     * Set genre
+     *
+     * @param \AppBundle\Entity\Genre $genre
+     *
+     * @return Film
+     */
+    public function setGenre(\AppBundle\Entity\Genre $genre = null)
+    {
+        $this->genre = $genre;
+
+        return $this;
+    }
+
+    /**
+     * Get genre
+     *
+     * @return \AppBundle\Entity\Genre
+     */
+    public function getGenre()
+    {
+        return $this->genre;
+    }
+}

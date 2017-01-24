@@ -94,4 +94,3 @@ class Episode
         return $this->duree;
     }
 }
-
