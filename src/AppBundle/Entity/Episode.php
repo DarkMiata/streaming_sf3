@@ -23,11 +23,10 @@ class Episode
 
      /**
      * @ORM\joinColumn(name="saison_id")
-     * @ORM\ManyToOne(targetEntity="Saison")
+     * @ORM\ManyToOne(targetEntity="Saison", inversedBy="episode")
      */
     private $saison;
-
-    
+  
     /**
      * @ORM\OneToMany(targetEntity="lien", mappedBy="episode")
      */

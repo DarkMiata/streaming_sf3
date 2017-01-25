@@ -21,21 +21,21 @@ class Film
      */
     private $id;
     
-    /**
-     * @ORM\ManyToMany(targetEntity="Casting")
+    /** ajout des realisateurs
+     * @ORM\ManyToMany(targetEntity="Casting", inversedBy="filmsRealises")
      * @ORM\JoinTable(name="film_realises")
      */
     private $realisateurs;
     
      /**
      * @ORM\joinColumn(name="pays_id")
-     * @ORM\ManyToOne(targetEntity="Pays")
+     * @ORM\ManyToOne(targetEntity="Pays",inversedBy="films")
      */
     private $pays;  
     
     /**
      * @ORM\JoinColumn(name="genre_id")
-     * @ORM\ManyToOne(targetEntity="Genre")
+     * @ORM\ManyToOne(targetEntity="Genre", inversedBy="films")
      */
     private $genre;
 

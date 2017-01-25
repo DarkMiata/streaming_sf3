@@ -23,13 +23,13 @@ class Serie
 
      /**
      * @ORM\joinColumn(name="genre_id")
-     * @ORM\ManyToOne(targetEntity="Genre")
+     * @ORM\ManyToOne(targetEntity="Genre",inversedBy="serie")
      */
     private $genre;  
     
      /**
      * @ORM\joinColumn(name="pays_id")
-     * @ORM\ManyToOne(targetEntity="Pays")
+     * @ORM\ManyToOne(targetEntity="Pays",inversedBy="serie")
      */
     private $pays;
     

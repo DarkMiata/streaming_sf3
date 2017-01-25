@@ -15,4 +15,11 @@
      */
     private $films;
     
+ // ====================================   
+        /** ajout des realisateurs
+     * @ORM\ManyToMany(targetEntity="Casting", inversedBy="filmsRealises")
+     * @ORM\JoinTable(name="film_realises")
+     */
+    private $realisateurs;
+    
     

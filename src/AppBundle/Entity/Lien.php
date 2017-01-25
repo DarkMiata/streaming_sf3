@@ -23,7 +23,7 @@ class Lien
 
     /**
      * @ORM\joinColumn(name="episode_id")
-     * @ORM\ManyToOne(targetEntity="Episode")
+     * @ORM\ManyToOne(targetEntity="Episode", inversedBy="lien")
      */
     private $episode;
     

@@ -22,6 +22,11 @@ class Casting
     private $id;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Film", mappedBy="realisateurs")  
+     */
+    private $filmsRealises;
+    
+    /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
@@ -92,5 +97,46 @@ class Casting
     public function getPrenom()
     {
         return $this->prenom;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->filmsRealises = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add filmsRealise
+     *
+     * @param \AppBundle\Entity\Film $filmsRealise
+     *
+     * @return Casting
+     */
+    public function addFilmsRealise(\AppBundle\Entity\Film $filmsRealise)
+    {
+        $this->filmsRealises[] = $filmsRealise;
+
+        return $this;
+    }
+
+    /**
+     * Remove filmsRealise
+     *
+     * @param \AppBundle\Entity\Film $filmsRealise
+     */
+    public function removeFilmsRealise(\AppBundle\Entity\Film $filmsRealise)
+    {
+        $this->filmsRealises->removeElement($filmsRealise);
+    }
+
+    /**
+     * Get filmsRealises
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFilmsRealises()
+    {
+        return $this->filmsRealises;
     }
 }

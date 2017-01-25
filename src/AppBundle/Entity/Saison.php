@@ -23,7 +23,7 @@ class Saison
 
      /**
      * @ORM\joinColumn(name="serie_id")
-     * @ORM\ManyToOne(targetEntity="Serie")
+     * @ORM\ManyToOne(targetEntity="Serie",inversedBy="saison")
      */
     private $serie;
     
